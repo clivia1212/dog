@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>边境牧羊犬 · Border Collie</title>
+<style>
+  :root {
+    --bg: #f6f4ee;
+    --card: #ffffff;
+    --ink: #26221c;
+    --muted: #6b6459;
+    --line: #e6e1d6;
+    --accent: #3f7d54;      /* pastoral green */
+    --accent-soft: #e7f0e9;
+    --warm: #c9873f;        /* collie tan */
+    --shadow: 0 8px 30px rgba(38,34,28,.08);
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+      "Hiragino Sans GB", "Microsoft YaHei", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.7;
+  }
+  /* language visibility */
+  body[data-lang="zh"] .en { display: none; }
+  body[data-lang="en"] .zh { display: none; }
+
+  header {
+    background: linear-gradient(160deg, #2f5e40 0%, #3f7d54 55%, #58a06f 100%);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .lang-switch {
+    position: absolute; top: 16px; right: 16px; z-index: 5;
+    display: flex; gap: 4px; background: rgba(255,255,255,.15);
+    padding: 4px; border-radius: 999px; backdrop-filter: blur(4px);
+  }
+  .lang-switch button {
+    border: 0; background: transparent; color: #fff; cursor: pointer;
+    font-size: 13px; padding: 6px 14px; border-radius: 999px; font-weight: 600;
+    transition: background .2s;
+  }
+  .lang-switch button.active { background: #fff; color: var(--accent); }
+
+  .hero {
+    max-width: 1000px; margin: 0 auto; padding: 56px 24px 40px;
+    display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: center;
+  }
+  .hero h1 { font-size: clamp(28px, 5vw, 46px); margin: 0 0 10px; line-height: 1.2; }
+  .hero p { font-size: 17px; opacity: .95; margin: 0 0 20px; max-width: 46ch; }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; }
+  .badge {
+    background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3);
+    padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600;
+  }
+  .hero-art { text-align: center; }
+  .hero-art svg { width: 100%; max-width: 320px; height: auto; filter: drop-shadow(0 10px 24px rgba(0,0,0,.25)); }
+
+  main { max-width: 1000px; margin: 0 auto; padding: 40px 24px 24px; }
+
+  section { margin-bottom: 30px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 28px;
+  }
+  h2 {
+    font-size: 22px; margin: 0 0 16px; display: flex; align-items: center; gap: 12px;
+  }
+  h2 .ico {
+    width: 38px; height: 38px; flex: 0 0 38px; border-radius: 10px;
+    background: var(--accent-soft); display: grid; place-items: center;
+  }
+  h2 .ico svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 1.8; }
+  h3 { font-size: 16px; margin: 18px 0 8px; color: var(--accent); }
+
+  ul { padding-left: 20px; margin: 8px 0; }
+  li { margin: 4px 0; }
+  .muted { color: var(--muted); font-size: 14px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 15px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  th { background: var(--accent-soft); color: #2f5e40; font-weight: 700; }
+  tr:last-child td { border-bottom: 0; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .traits { list-style: none; padding: 0; }
+  .traits li {
+    padding: 12px 14px; margin: 8px 0; background: var(--accent-soft);
+    border-radius: 10px; border-left: 4px solid var(--accent);
+  }
+  .traits b { color: #2f5e40; }
+
+  .callout {
+    background: #fbf3e7; border: 1px solid #f0dcc0; border-left: 4px solid var(--warm);
+    padding: 12px 16px; border-radius: 10px; font-size: 14px; margin-top: 12px;
+  }
+  .fit { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .fit .yes, .fit .no { padding: 16px; border-radius: 12px; }
+  .fit .yes { background: #e7f0e9; border: 1px solid #cfe3d5; }
+  .fit .no  { background: #fbeceb; border: 1px solid #f2d4d1; }
+  .fit h3 { margin-top: 0; }
+  .fit .no h3 { color: #b4483d; }
+
+  footer {
+    max-width: 1000px; margin: 0 auto; padding: 24px; color: var(--muted);
+    font-size: 13px; text-align: center; border-top: 1px solid var(--line);
+  }
+  footer a { color: var(--accent); }
+
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; text-align: center; padding-top: 70px; }
+    .hero-art { order: -1; }
+    .badges { justify-content: center; }
+    .grid2, .fit { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body data-lang="zh">
+
+<header>
+  <div class="lang-switch">
+    <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+    <button id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+  <div class="hero">
+    <div>
+      <h1><span class="zh">边境牧羊犬</span><span class="en">Border Collie</span></h1>
+      <p class="zh">原产英国边境地区,以聪明、敏捷和超强工作能力闻名,被公认为世界上最聪明的犬种。</p>
+      <p class="en">From the Anglo-Scottish border, famed for intelligence, agility, and working ability — widely regarded as the world's smartest dog breed.</p>
+      <div class="badges">
+        <span class="badge zh">🧠 智商第 1</span><span class="badge en">🧠 #1 Smartest</span>
+        <span class="badge zh">⚡ 精力旺盛</span><span class="badge en">⚡ High Energy</span>
+        <span class="badge zh">🐑 牧羊犬</span><span class="badge en">🐑 Herding Dog</span>
+        <span class="badge zh">❤️ 忠诚黏人</span><span class="badge en">❤️ Loyal</span>
+      </div>
+    </div>
+    <div class="hero-art" aria-label="Border Collie illustration">
+      <!-- Inline SVG border collie: always renders, no network needed -->
+      <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" role="img">
+        <ellipse cx="120" cy="215" rx="70" ry="12" fill="rgba(0,0,0,.18)"/>
+        <!-- body -->
+        <path d="M70 150 q-8 45 18 55 q20 6 24-8 q30 12 44-6 q22 6 30-16 q10-30-8-52 q-8-10-20-12 l-60 4 q-18 6-28 27z" fill="#2b2b2b"/>
+        <path d="M92 168 q0 40 8 48 q10 6 14-2 q-14-20-8-46z" fill="#f4f1ea"/>
+        <!-- chest white -->
+        <path d="M78 150 q-6 30 4 50 q10-4 12-16 q-8-18-2-36z" fill="#f4f1ea"/>
+        <!-- head -->
+        <g>
+          <path d="M60 92 q-2-34 26-40 q30-6 44 18 q10 20 2 40 q-10 22-38 24 q-30 0-36-24 q-2-10 2-18z" fill="#2b2b2b"/>
+          <!-- white blaze -->
+          <path d="M96 54 q10 30 4 74 q-8 2-14-2 q-6-40 2-72 q4-2 8 0z" fill="#f4f1ea"/>
+          <!-- muzzle white -->
+          <path d="M74 108 q18 20 44 8 q-4 16-26 16 q-18-2-24-16 q2-6 6-8z" fill="#f4f1ea"/>
+          <!-- ears -->
+          <path d="M58 60 q-8-22 6-34 q10 8 12 30 q-10 0-18 4z" fill="#1f1f1f"/>
+          <path d="M132 58 q10-22-2-36 q-12 8-14 30 q8 0 16 6z" fill="#1f1f1f"/>
+          <!-- eyes -->
+          <ellipse cx="82" cy="82" rx="7" ry="8" fill="#fff"/>
+          <ellipse cx="110" cy="80" rx="7" ry="8" fill="#fff"/>
+          <circle cx="83" cy="83" r="4" fill="#5a3b1a"/>
+          <circle cx="111" cy="81" r="4" fill="#5a3b1a"/>
+          <circle cx="84.5" cy="81.5" r="1.3" fill="#fff"/>
+          <circle cx="112.5" cy="79.5" r="1.3" fill="#fff"/>
+          <!-- nose -->
+          <ellipse cx="95" cy="112" rx="7" ry="5" fill="#1a1a1a"/>
+          <!-- mouth / tongue -->
+          <path d="M95 117 q0 8-8 10 q6 8 14 2 q8 6 14-2 q-8-2-8-10" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+          <path d="M90 126 q5 8 12 3 q-1 8-7 8 q-6-1-5-11z" fill="#e07a86"/>
+        </g>
+        <!-- tail -->
+        <path d="M170 150 q34 4 40 30 q-4 8-12 6 q-6-18-30-24z" fill="#2b2b2b"/>
+        <path d="M198 178 q8 4 10 12 q-6 4-10-2z" fill="#f4f1ea"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Quick facts -->
+  <section><div class="card">
+    <h2><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>
+      <span class="zh">基本信息</span><span class="en">Quick Facts</span></h2>
+    <table>
+      <tr><th class="zh">项目</th><th class="zh">内容</th><th class="en">Item</th><th class="en">Details</th></tr>
+      <tr><td class="zh">原产地</td><td class="zh">英国(英格兰-苏格兰边境)</td><td class="en">Origin</td><td class="en">UK (Anglo-Scottish border)</td></tr>
+      <tr><td class="zh">类型</td><td class="zh">牧羊犬 / 工作犬</td><td class="en">Group</td><td class="en">Herding / Working dog</td></tr>
+      <tr><td class="zh">寿命</td><td class="zh">约 12–15 年</td><td class="en">Lifespan</td><td class="en">~12–15 years</td></tr>
+      <tr><td class="zh">体重</td><td class="zh">公 14–20 kg / 母 12–19 kg</td><td class="en">Weight</td><td class="en">M 14–20 kg / F 12–19 kg</td></tr>
+      <tr><td class="zh">肩高</td><td class="zh">公 48–56 cm / 母 46–53 cm</td><td class="en">Height</td><td class="en">M 48–56 cm / F 46–53 cm</td></tr>
+      <tr><td class="zh">智商</td><td class="zh">世界犬种第 1 名</td><td class="en">Intelligence</td><td class="en">Ranked #1 of all breeds</td></tr>
+    </table>
+  </div></section>
+
+  <!-- Appearance -->
+  <section><div class="card">
+    <h2><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg></span>
+      <span class="zh">外观特征</span><span class="en">Appearance</span></h2>
+    <div class="zh">
+      <ul>
+        <li><b>体型</b>:中等,身体略长,肌肉发达,兼具速度与耐力。</li>
+        <li><b>被毛</b>:长毛(粗毛)与短毛(顺毛)两种,双层被毛,防水保暖。</li>
+        <li><b>毛色</b>:黑白最常见,另有蓝白、红白、蓝色、三色、陨石色等。</li>
+        <li><b>眼睛</b>:椭圆形,眼神专注,部分为蓝眼或异色瞳。</li>
+        <li><b>耳朵</b>:半立耳或立耳,警觉时竖起。</li>
+      </ul>
+      <div class="callout">🐾 最经典的形象是黑白被毛和标志性的"凝视"(eye)——这是它控制羊群的本能。</div>
+    </div>
+    <div class="en">
+      <ul>
+        <li><b>Body</b>: Medium, slightly longer than tall, muscular — built for speed and endurance.</li>
+        <li><b>Coat</b>: Rough (long) or smooth (short); double coat, weather-resistant and insulating.</li>
+        <li><b>Colors</b>: Black-and-white most common; also blue-and-white, red-and-white, blue, tricolor, merle.</li>
+        <li><b>Eyes</b>: Oval and intensely focused; some blue or heterochromatic.</li>
+        <li><b>Ears</b>: Semi-erect or erect, raised when alert.</li>
+      </ul>
+      <div class="callout">🐾 Its signature look: a black-and-white coat and the intense "eye" it uses to control livestock.</div>
+    </div>
+  </div></section>
+
+  <!-- Temperament -->
+  <section><div class="card">
+    <h2><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9C1 9 2.5 5.5 6 5.5c2 0 3 1.2 4 2.5 1-1.3 2-2.5 4-2.5 3.5 0 5 3.5 3.5 6.5C19 16.5 12 21 12 21z"/></svg></span>
+      <span class="zh">性格特点</span><span class="en">Temperament</span></h2>
+    <ul class="traits zh">
+      <li><b>极其聪明</b> — 可理解上百个指令,训练上限极高。</li>
+      <li><b>精力旺盛</b> — 需要大量运动和脑力消耗。</li>
+      <li><b>忠诚黏人</b> — 渴望陪伴与协作。</li>
+      <li><b>敏感警觉</b> — 对主人情绪与指令高度敏感。</li>
+      <li><b>牧羊本能</b> — 会追逐、围拢移动的物体。</li>
+    </ul>
+    <ul class="traits en">
+      <li><b>Highly intelligent</b> — understands hundreds of commands.</li>
+      <li><b>High energy</b> — needs lots of physical & mental work.</li>
+      <li><b>Loyal & affectionate</b> — craves companionship and teamwork.</li>
+      <li><b>Sensitive & alert</b> — very responsive to your cues.</li>
+      <li><b>Herding instinct</b> — may chase and "gather" moving things.</li>
+    </ul>
+  </div></section>
+
+  <!-- Exercise & care -->
+  <section><div class="card">
+    <h2><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 12h4l2-6 4 12 2-6h4"/></svg></span>
+      <span class="zh">运动 · 训练 · 护理</span><span class="en">Exercise · Training · Grooming</span></h2>
+    <div class="grid2">
+      <div class="zh">
+        <h3>运动</h3>
+        <ul><li>每天至少 <b>1–2 小时</b>高强度运动:跑步、飞盘、捡球、敏捷训练。</li><li>仅散步远远不够,运动不足易焦虑、拆家。</li></ul>
+        <h3>训练</h3>
+        <ul><li>尽早社会化与基础训练。</li><li>以正向奖励为主(零食、玩具、表扬)。</li></ul>
+        <h3>护理</h3>
+        <ul><li>长毛每周梳 2–3 次,换毛季加勤。</li><li>约每月洗澡 1 次;定期清耳、刷牙、剪指甲。</li></ul>
+      </div>
+      <div class="en">
+        <h3>Exercise</h3>
+        <ul><li>At least <b>1–2 hours</b> of vigorous activity daily: running, frisbee, fetch, agility.</li><li>Walks alone aren't enough — too little leads to anxiety and destruction.</li></ul>
+        <h3>Training</h3>
+        <ul><li>Socialize and train early.</li><li>Use positive reinforcement (treats, toys, praise).</li></ul>
+        <h3>Grooming</h3>
+        <ul><li>Brush rough coats 2–3×/week; more in shedding season.</li><li>Bathe ~monthly; clean ears, brush teeth, trim nails regularly.</li></ul>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- Health -->
+  <section><div class="card">
+    <h2><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+      <span class="zh">常见健康问题</span><span class="en">Common Health Concerns</span></h2>
+    <div class="zh">
+      <ul>
+        <li>髋关节发育不良(CHD)</li>
+        <li>眼部疾病(柯利眼异常 CEA、进行性视网膜萎缩 PRA)</li>
+        <li>癫痫</li>
+        <li>MDR1 基因缺陷(对某些药物敏感)</li>
+        <li>听力问题(陨石色个体更需留意)</li>
+      </ul>
+      <div class="callout">🩺 定期体检;购买/领养时了解父母犬健康与基因检测情况。</div>
+    </div>
+    <div class="en">
+      <ul>
+        <li>Canine hip dysplasia (CHD)</li>
+        <li>Eye disorders (CEA, PRA)</li>
+        <li>Epilepsy</li>
+        <li>MDR1 gene mutation (drug sensitivity)</li>
+        <li>Hearing issues (especially merle dogs)</li>
+      </ul>
+      <div class="callout">🩺 Get regular check-ups; ask about the parents' health and genetic tests.</div>
+    </div>
+  </div></section>
+
+  <!-- Vaccine & deworm -->
+  <section><div class="card">
+    <h2><span class="ico"><svg viewBox="0 0 24 24"><path d="M3 21l6-6m2-2l7-7m-3-3l6 6-4 1-1-1-2 2 1 1-2 2-1-1-2 2 1 1-2 2-3-3z"/></svg></span>
+      <span class="zh">疫苗与驱虫时间表</span><span class="en">Vaccine & Deworming Schedule</span></h2>
+    <table>
+      <tr><th class="zh">周龄</th><th class="zh">疫苗</th><th class="en">Age</th><th class="en">Vaccine</th></tr>
+      <tr><td class="zh">6–8 周</td><td class="zh">第一针联苗</td><td class="en">6–8 wk</td><td class="en">First combo vaccine</td></tr>
+      <tr><td class="zh">10–12 周</td><td class="zh">第二针联苗</td><td class="en">10–12 wk</td><td class="en">Second combo vaccine</td></tr>
+      <tr><td class="zh">14–16 周</td><td class="zh">第三针联苗 + 狂犬</td><td class="en">14–16 wk</td><td class="en">Third combo + rabies</td></tr>
+      <tr><td class="zh">每年</td><td class="zh">联苗 + 狂犬 加强</td><td class="en">Yearly</td><td class="en">Combo + rabies booster</td></tr>
+    </table>
+    <p class="muted zh">驱虫:体内幼犬每月 1 次、成犬每 3 个月 1 次;体外每月 1 次。完成基础疫苗前避免去人犬密集场所。</p>
+    <p class="muted en">Deworming: internal — puppies monthly, adults every 3 months; external monthly. Avoid crowded places until the full puppy series is done.</p>
+  </div></section>
+
+  <!-- Feeding -->
+  <section><div class="card">
+    <h2><span class="ico"><svg viewBox="0 0 24 24"><path d="M6 3v7a3 3 0 006 0V3M9 3v18M18 3c-2 0-3 3-3 6s1 4 3 4v8"/></svg></span>
+      <span class="zh">分阶段喂养</span><span class="en">Feeding by Life Stage</span></h2>
+    <table>
+      <tr><th class="zh">阶段</th><th class="zh">年龄</th><th class="zh">要点</th><th class="en">Stage</th><th class="en">Age</th><th class="en">Key points</th></tr>
+      <tr><td class="zh">幼犬</td><td class="zh">2–12 月</td><td class="zh">幼犬粮,每天 3–4 顿</td><td class="en">Puppy</td><td class="en">2–12 mo</td><td class="en">Puppy food, 3–4 meals/day</td></tr>
+      <tr><td class="zh">青年</td><td class="zh">1–2 岁</td><td class="zh">过渡成犬粮,每天 2 顿</td><td class="en">Adolescent</td><td class="en">1–2 yr</td><td class="en">Transition to adult food, 2 meals</td></tr>
+      <tr><td class="zh">成犬</td><td class="zh">2–7 岁</td><td class="zh">成犬粮,控热防肥胖</td><td class="en">Adult</td><td class="en">2–7 yr</td><td class="en">Adult food, control calories</td></tr>
+      <tr><td class="zh">老年</td><td class="zh">7 岁+</td><td class="zh">老年粮,护关节/心脏</td><td class="en">Senior</td><td class="en">7 yr+</td><td class="en">Senior food, joints & heart</td></tr>
+    </table>
+    <div class="callout zh">⚠️ 换粮 7 天渐进过渡;常备清水;禁喂巧克力、洋葱、大蒜、葡萄、木糖醇。</div>
+    <div class="callout en">⚠️ Switch food gradually over ~7 days; keep fresh water; never feed chocolate, onion, garlic, grapes, or xylitol.</div>
+  </div></section>
+
+  <!-- Fit -->
+  <section><div class="card">
+    <h2><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9C1 9 2.5 5.5 6 5.5c2 0 3 1.2 4 2.5 1-1.3 2-2.5 4-2.5 3.5 0 5 3.5 3.5 6.5C19 16.5 12 21 12 21z"/></svg></span>
+      <span class="zh">适合什么样的主人</span><span class="en">Is It Right for You?</span></h2>
+    <div class="fit">
+      <div class="yes">
+        <h3 class="zh">✅ 适合</h3><h3 class="en">✅ Good fit</h3>
+        <ul class="zh"><li>热爱运动、有时间陪伴</li><li>愿意投入训练与互动</li><li>喜欢犬类运动(敏捷/飞盘)</li></ul>
+        <ul class="en"><li>Active, with time to spend</li><li>Willing to train and interact</li><li>Enjoys dog sports (agility/frisbee)</li></ul>
+      </div>
+      <div class="no">
+        <h3 class="zh">⛔ 不太适合</h3><h3 class="en">⛔ Not ideal</h3>
+        <ul class="zh"><li>长期不在家、无暇陪伴</li><li>无法保证每天运动量</li><li>想养安静省心的狗</li></ul>
+        <ul class="en"><li>Away from home for long hours</li><li>Can't guarantee daily exercise</li><li>Wants a quiet, low-energy dog</li></ul>
+      </div>
+    </div>
+  </div></section>
+
+</main>
+
+<footer>
+  <p class="zh">本页面仅供参考,具体饲养请结合个体情况并咨询专业兽医。<br>更多图片:<a href="https://commons.wikimedia.org/wiki/Category:Border_Collies" target="_blank" rel="noopener">Wikimedia Commons</a></p>
+  <p class="en">For reference only — consult a professional veterinarian for your dog's specific care.<br>More photos: <a href="https://commons.wikimedia.org/wiki/Category:Border_Collies" target="_blank" rel="noopener">Wikimedia Commons</a></p>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.body.setAttribute('data-lang', lang);
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  }
+</script>
+</body>
+</html>
