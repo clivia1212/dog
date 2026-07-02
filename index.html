@@ -3,351 +3,434 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>边境牧羊犬 · Border Collie</title>
+<title>边境牧羊犬 · 品种与行为参考 | Border Collie — A Reference</title>
 <style>
   :root {
-    --bg: #f6f4ee;
-    --card: #ffffff;
-    --ink: #26221c;
-    --muted: #6b6459;
-    --line: #e6e1d6;
-    --accent: #3f7d54;      /* pastoral green */
-    --accent-soft: #e7f0e9;
-    --warm: #c9873f;        /* collie tan */
-    --shadow: 0 8px 30px rgba(38,34,28,.08);
-    --radius: 16px;
+    --paper: #f3f1ec;
+    --card: #fbfaf7;
+    --ink: #1c2530;        /* deep slate */
+    --ink-soft: #46505c;
+    --muted: #6d7580;
+    --line: #d9d5cb;
+    --rule: #c3bdb0;
+    --accent: #6e2a2a;      /* restrained oxblood */
+    --accent-2: #24435a;    /* deep steel blue */
+    --tint: #ece8df;
+    --tint-blue: #e7edf1;
+    --radius: 4px;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
+             "Times New Roman", "Songti SC", "SimSun", "Noto Serif SC", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+            "Hiragino Sans GB", "Microsoft YaHei", Roboto, Helvetica, Arial, sans-serif;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-      "Hiragino Sans GB", "Microsoft YaHei", Roboto, Helvetica, Arial, sans-serif;
+    font-family: var(--sans);
     color: var(--ink);
-    background: var(--bg);
-    line-height: 1.7;
+    background: var(--paper);
+    line-height: 1.75;
+    font-size: 16px;
   }
-  /* language visibility */
   body[data-lang="zh"] .en { display: none; }
   body[data-lang="en"] .zh { display: none; }
 
+  /* ---------- Masthead ---------- */
   header {
-    background: linear-gradient(160deg, #2f5e40 0%, #3f7d54 55%, #58a06f 100%);
-    color: #fff;
+    background: var(--ink);
+    color: #f3f1ec;
+    border-bottom: 3px solid var(--accent);
+  }
+  .masthead {
+    max-width: 940px; margin: 0 auto; padding: 40px 28px 30px;
     position: relative;
-    overflow: hidden;
   }
   .lang-switch {
-    position: absolute; top: 16px; right: 16px; z-index: 5;
-    display: flex; gap: 4px; background: rgba(255,255,255,.15);
-    padding: 4px; border-radius: 999px; backdrop-filter: blur(4px);
+    position: absolute; top: 20px; right: 28px;
+    display: flex; border: 1px solid rgba(243,241,236,.35); border-radius: 2px; overflow: hidden;
   }
   .lang-switch button {
-    border: 0; background: transparent; color: #fff; cursor: pointer;
-    font-size: 13px; padding: 6px 14px; border-radius: 999px; font-weight: 600;
-    transition: background .2s;
+    border: 0; background: transparent; color: #cfd4da; cursor: pointer;
+    font-size: 12px; letter-spacing: .06em; padding: 6px 14px; font-weight: 600;
   }
-  .lang-switch button.active { background: #fff; color: var(--accent); }
+  .lang-switch button.active { background: #f3f1ec; color: var(--ink); }
 
-  .hero {
-    max-width: 1000px; margin: 0 auto; padding: 56px 24px 40px;
-    display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: center;
+  .kicker {
+    font-size: 12px; letter-spacing: .28em; text-transform: uppercase;
+    color: #b9a08f; margin-bottom: 14px;
   }
-  .hero h1 { font-size: clamp(28px, 5vw, 46px); margin: 0 0 10px; line-height: 1.2; }
-  .hero p { font-size: 17px; opacity: .95; margin: 0 0 20px; max-width: 46ch; }
-  .badges { display: flex; flex-wrap: wrap; gap: 8px; }
-  .badge {
-    background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3);
-    padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600;
+  .masthead h1 {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(30px, 5.5vw, 50px); line-height: 1.12; margin: 0 0 12px;
+    letter-spacing: .01em;
   }
-  .hero-art { text-align: center; }
-  .hero-art svg { width: 100%; max-width: 320px; height: auto; filter: drop-shadow(0 10px 24px rgba(0,0,0,.25)); }
+  .masthead .sub {
+    font-family: var(--serif); font-style: italic; font-size: 18px;
+    color: #cfd4da; margin: 0 0 20px; max-width: 60ch;
+  }
+  .masthead .meta {
+    font-size: 12.5px; color: #9aa2ac; letter-spacing: .04em;
+    border-top: 1px solid rgba(243,241,236,.18); padding-top: 14px;
+    display: flex; flex-wrap: wrap; gap: 6px 22px;
+  }
+  .masthead .meta b { color: #d8b9a3; font-weight: 600; }
 
-  main { max-width: 1000px; margin: 0 auto; padding: 40px 24px 24px; }
+  /* ---------- Layout ---------- */
+  main { max-width: 940px; margin: 0 auto; padding: 0 28px; }
 
-  section { margin-bottom: 30px; }
-  .card {
+  .toc {
     background: var(--card); border: 1px solid var(--line);
-    border-radius: var(--radius); box-shadow: var(--shadow);
-    padding: 28px;
+    padding: 22px 26px; margin: 34px 0; border-radius: var(--radius);
   }
-  h2 {
-    font-size: 22px; margin: 0 0 16px; display: flex; align-items: center; gap: 12px;
+  .toc h2 {
+    font-family: var(--serif); font-size: 14px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--muted); margin: 0 0 14px; border: 0; padding: 0;
   }
-  h2 .ico {
-    width: 38px; height: 38px; flex: 0 0 38px; border-radius: 10px;
-    background: var(--accent-soft); display: grid; place-items: center;
-  }
-  h2 .ico svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 1.8; }
-  h3 { font-size: 16px; margin: 18px 0 8px; color: var(--accent); }
+  .toc ol { margin: 0; padding: 0; list-style: none; column-count: 2; column-gap: 40px; }
+  .toc li { margin: 5px 0; break-inside: avoid; }
+  .toc a { color: var(--ink-soft); text-decoration: none; font-size: 14.5px; display: flex; gap: 10px; }
+  .toc a:hover { color: var(--accent); }
+  .toc .n { color: var(--accent); font-family: var(--serif); font-weight: 600; min-width: 20px; }
 
-  ul { padding-left: 20px; margin: 8px 0; }
-  li { margin: 4px 0; }
-  .muted { color: var(--muted); font-size: 14px; }
+  section { padding: 30px 0; border-top: 1px solid var(--line); }
+  section:first-of-type { border-top: 0; }
 
-  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 15px; }
-  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
-  th { background: var(--accent-soft); color: #2f5e40; font-weight: 700; }
-  tr:last-child td { border-bottom: 0; }
-
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .traits { list-style: none; padding: 0; }
-  .traits li {
-    padding: 12px 14px; margin: 8px 0; background: var(--accent-soft);
-    border-radius: 10px; border-left: 4px solid var(--accent);
+  h2.sec {
+    font-family: var(--serif); font-weight: 600; font-size: 24px;
+    margin: 0 0 18px; color: var(--ink); display: flex; align-items: baseline; gap: 14px;
   }
-  .traits b { color: #2f5e40; }
-
-  .callout {
-    background: #fbf3e7; border: 1px solid #f0dcc0; border-left: 4px solid var(--warm);
-    padding: 12px 16px; border-radius: 10px; font-size: 14px; margin-top: 12px;
+  h2.sec .num {
+    font-size: 15px; color: var(--accent); font-weight: 600; letter-spacing: .05em;
+    border: 1px solid var(--rule); border-radius: 2px; padding: 2px 9px; line-height: 1.4;
+    flex: 0 0 auto; align-self: center;
   }
-  .fit { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .fit .yes, .fit .no { padding: 16px; border-radius: 12px; }
-  .fit .yes { background: #e7f0e9; border: 1px solid #cfe3d5; }
-  .fit .no  { background: #fbeceb; border: 1px solid #f2d4d1; }
+  h3 {
+    font-family: var(--serif); font-size: 17px; margin: 22px 0 8px; color: var(--accent-2);
+    font-weight: 600;
+  }
+  p { margin: 10px 0; }
+  ul { padding-left: 22px; margin: 10px 0; }
+  li { margin: 5px 0; }
+  strong, b { color: var(--ink); }
+  .lead {
+    font-family: var(--serif); font-size: 18px; color: var(--ink-soft);
+    line-height: 1.7;
+  }
+
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 14.5px; }
+  caption { text-align: left; font-size: 12.5px; color: var(--muted); padding-bottom: 6px; font-style: italic; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  thead th {
+    background: var(--tint); color: var(--ink); font-weight: 600;
+    border-bottom: 2px solid var(--rule); font-size: 13px; letter-spacing: .03em;
+  }
+  tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+
+  .note {
+    border-left: 3px solid var(--accent-2); background: var(--tint-blue);
+    padding: 12px 18px; margin: 16px 0; font-size: 14.5px; color: var(--ink-soft);
+  }
+  .warn {
+    border-left: 3px solid var(--accent); background: #f3e7e4;
+    padding: 12px 18px; margin: 16px 0; font-size: 14.5px; color: #4a2320;
+  }
+  .warn b, .note b { color: var(--accent); }
+  .note b { color: var(--accent-2); }
+
+  .fit { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
   .fit h3 { margin-top: 0; }
-  .fit .no h3 { color: #b4483d; }
+  .fit .col { border: 1px solid var(--line); padding: 4px 20px 12px; border-radius: var(--radius); background: var(--card); }
+  .fit .yes { border-top: 3px solid var(--accent-2); }
+  .fit .no  { border-top: 3px solid var(--accent); }
+
+  .figure { text-align: center; margin: 6px 0 4px; }
+  .figure svg { width: 100%; max-width: 230px; height: auto; }
+  .figure figcaption { font-size: 12px; color: var(--muted); font-style: italic; margin-top: 4px; }
 
   footer {
-    max-width: 1000px; margin: 0 auto; padding: 24px; color: var(--muted);
-    font-size: 13px; text-align: center; border-top: 1px solid var(--line);
+    max-width: 940px; margin: 0 auto; padding: 26px 28px 48px; color: var(--muted);
+    font-size: 12.5px; border-top: 3px solid var(--accent); margin-top: 20px; line-height: 1.7;
   }
-  footer a { color: var(--accent); }
+  footer a { color: var(--accent-2); }
 
-  @media (max-width: 760px) {
-    .hero { grid-template-columns: 1fr; text-align: center; padding-top: 70px; }
-    .hero-art { order: -1; }
-    .badges { justify-content: center; }
+  @media (max-width: 720px) {
+    .toc ol { column-count: 1; }
     .grid2, .fit { grid-template-columns: 1fr; }
+    .lang-switch { position: static; margin-bottom: 20px; display: inline-flex; }
   }
 </style>
 </head>
 <body data-lang="zh">
 
 <header>
-  <div class="lang-switch">
-    <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
-    <button id="btn-en" onclick="setLang('en')">EN</button>
-  </div>
-  <div class="hero">
-    <div>
-      <h1><span class="zh">边境牧羊犬</span><span class="en">Border Collie</span></h1>
-      <p class="zh">原产英国边境地区,以聪明、敏捷和超强工作能力闻名,被公认为世界上最聪明的犬种。</p>
-      <p class="en">From the Anglo-Scottish border, famed for intelligence, agility, and working ability — widely regarded as the world's smartest dog breed.</p>
-      <div class="badges">
-        <span class="badge zh">🧠 智商第 1</span><span class="badge en">🧠 #1 Smartest</span>
-        <span class="badge zh">⚡ 精力旺盛</span><span class="badge en">⚡ High Energy</span>
-        <span class="badge zh">🐑 牧羊犬</span><span class="badge en">🐑 Herding Dog</span>
-        <span class="badge zh">❤️ 忠诚黏人</span><span class="badge en">❤️ Loyal</span>
-      </div>
+  <div class="masthead">
+    <div class="lang-switch">
+      <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
     </div>
-    <div class="hero-art" aria-label="Border Collie illustration">
-      <!-- Inline SVG border collie: always renders, no network needed -->
-      <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" role="img">
-        <ellipse cx="120" cy="215" rx="70" ry="12" fill="rgba(0,0,0,.18)"/>
-        <!-- body -->
-        <path d="M70 150 q-8 45 18 55 q20 6 24-8 q30 12 44-6 q22 6 30-16 q10-30-8-52 q-8-10-20-12 l-60 4 q-18 6-28 27z" fill="#2b2b2b"/>
-        <path d="M92 168 q0 40 8 48 q10 6 14-2 q-14-20-8-46z" fill="#f4f1ea"/>
-        <!-- chest white -->
-        <path d="M78 150 q-6 30 4 50 q10-4 12-16 q-8-18-2-36z" fill="#f4f1ea"/>
-        <!-- head -->
-        <g>
-          <path d="M60 92 q-2-34 26-40 q30-6 44 18 q10 20 2 40 q-10 22-38 24 q-30 0-36-24 q-2-10 2-18z" fill="#2b2b2b"/>
-          <!-- white blaze -->
-          <path d="M96 54 q10 30 4 74 q-8 2-14-2 q-6-40 2-72 q4-2 8 0z" fill="#f4f1ea"/>
-          <!-- muzzle white -->
-          <path d="M74 108 q18 20 44 8 q-4 16-26 16 q-18-2-24-16 q2-6 6-8z" fill="#f4f1ea"/>
-          <!-- ears -->
-          <path d="M58 60 q-8-22 6-34 q10 8 12 30 q-10 0-18 4z" fill="#1f1f1f"/>
-          <path d="M132 58 q10-22-2-36 q-12 8-14 30 q8 0 16 6z" fill="#1f1f1f"/>
-          <!-- eyes -->
-          <ellipse cx="82" cy="82" rx="7" ry="8" fill="#fff"/>
-          <ellipse cx="110" cy="80" rx="7" ry="8" fill="#fff"/>
-          <circle cx="83" cy="83" r="4" fill="#5a3b1a"/>
-          <circle cx="111" cy="81" r="4" fill="#5a3b1a"/>
-          <circle cx="84.5" cy="81.5" r="1.3" fill="#fff"/>
-          <circle cx="112.5" cy="79.5" r="1.3" fill="#fff"/>
-          <!-- nose -->
-          <ellipse cx="95" cy="112" rx="7" ry="5" fill="#1a1a1a"/>
-          <!-- mouth / tongue -->
-          <path d="M95 117 q0 8-8 10 q6 8 14 2 q8 6 14-2 q-8-2-8-10" fill="none" stroke="#1a1a1a" stroke-width="2"/>
-          <path d="M90 126 q5 8 12 3 q-1 8-7 8 q-6-1-5-11z" fill="#e07a86"/>
+    <div class="kicker zh">品种与行为参考</div>
+    <div class="kicker en">Breed &amp; Behaviour Reference</div>
+    <h1><span class="zh">边境牧羊犬</span><span class="en">The Border Collie</span></h1>
+    <p class="sub zh">一份关于其起源、生理特征、行为与心理的系统性参考资料</p>
+    <p class="sub en">A systematic reference on its origin, physical traits, behaviour, and psychology</p>
+    <div class="figure" style="max-width:200px;margin:8px 0 20px">
+      <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Border Collie">
+        <!-- restrained monochrome collie head, engraving-like -->
+        <g fill="none" stroke="#d8b9a3" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M60 40 q-6-24 18-30 q28-6 40 16 q10 18 3 38 q-9 24-36 26 q-28 0-34-24 q-3-12 9-22z"/>
+          <path d="M58 24 q-8-16 4-24 q10 8 12 26"/>
+          <path d="M120 22 q10-16-2-24 q-10 8-12 26"/>
+          <path d="M92 18 q10 34 3 74"/>
+          <path d="M70 62 q22 18 44 4"/>
+          <ellipse cx="80" cy="50" rx="5" ry="6"/>
+          <ellipse cx="108" cy="48" rx="5" ry="6"/>
+          <ellipse cx="94" cy="72" rx="6" ry="4" fill="#d8b9a3"/>
         </g>
-        <!-- tail -->
-        <path d="M170 150 q34 4 40 30 q-4 8-12 6 q-6-18-30-24z" fill="#2b2b2b"/>
-        <path d="M198 178 q8 4 10 12 q-6 4-10-2z" fill="#f4f1ea"/>
       </svg>
+    </div>
+    <div class="meta">
+      <span class="zh"><b>学名</b> Canis lupus familiaris</span><span class="en"><b>Species</b> Canis lupus familiaris</span>
+      <span class="zh"><b>原产</b> 英国边境地区</span><span class="en"><b>Origin</b> Anglo-Scottish border</span>
+      <span class="zh"><b>类别</b> 牧羊 / 工作犬</span><span class="en"><b>Group</b> Herding / Working</span>
+      <span class="zh"><b>犬类智商</b> 排名第一</span><span class="en"><b>Canine IQ</b> Ranked first</span>
     </div>
   </div>
 </header>
 
 <main>
 
-  <!-- Quick facts -->
-  <section><div class="card">
-    <h2><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>
-      <span class="zh">基本信息</span><span class="en">Quick Facts</span></h2>
-    <table>
-      <tr><th class="zh">项目</th><th class="zh">内容</th><th class="en">Item</th><th class="en">Details</th></tr>
-      <tr><td class="zh">原产地</td><td class="zh">英国(英格兰-苏格兰边境)</td><td class="en">Origin</td><td class="en">UK (Anglo-Scottish border)</td></tr>
-      <tr><td class="zh">类型</td><td class="zh">牧羊犬 / 工作犬</td><td class="en">Group</td><td class="en">Herding / Working dog</td></tr>
-      <tr><td class="zh">寿命</td><td class="zh">约 12–15 年</td><td class="en">Lifespan</td><td class="en">~12–15 years</td></tr>
-      <tr><td class="zh">体重</td><td class="zh">公 14–20 kg / 母 12–19 kg</td><td class="en">Weight</td><td class="en">M 14–20 kg / F 12–19 kg</td></tr>
-      <tr><td class="zh">肩高</td><td class="zh">公 48–56 cm / 母 46–53 cm</td><td class="en">Height</td><td class="en">M 48–56 cm / F 46–53 cm</td></tr>
-      <tr><td class="zh">智商</td><td class="zh">世界犬种第 1 名</td><td class="en">Intelligence</td><td class="en">Ranked #1 of all breeds</td></tr>
-    </table>
-  </div></section>
+  <!-- TOC -->
+  <nav class="toc">
+    <h2 class="zh">目录</h2><h2 class="en">Contents</h2>
+    <ol class="zh">
+      <li><a href="#s1"><span class="n">Ⅰ</span>概述与基本信息</a></li>
+      <li><a href="#s2"><span class="n">Ⅱ</span>外观与生理特征</a></li>
+      <li><a href="#s3"><span class="n">Ⅲ</span>气质与性格</a></li>
+      <li><a href="#s4"><span class="n">Ⅳ</span>运动、训练与护理</a></li>
+      <li><a href="#s5"><span class="n">Ⅴ</span>行为与叫声解读</a></li>
+      <li><a href="#s6"><span class="n">Ⅵ</span>健康与遗传问题</a></li>
+      <li><a href="#s7"><span class="n">Ⅶ</span>饲养适配性评估</a></li>
+    </ol>
+    <ol class="en">
+      <li><a href="#s1"><span class="n">Ⅰ</span>Overview &amp; Facts</a></li>
+      <li><a href="#s2"><span class="n">Ⅱ</span>Physical Characteristics</a></li>
+      <li><a href="#s3"><span class="n">Ⅲ</span>Temperament</a></li>
+      <li><a href="#s4"><span class="n">Ⅳ</span>Exercise, Training &amp; Care</a></li>
+      <li><a href="#s5"><span class="n">Ⅴ</span>Behaviour &amp; Vocalisation</a></li>
+      <li><a href="#s6"><span class="n">Ⅵ</span>Health &amp; Genetics</a></li>
+      <li><a href="#s7"><span class="n">Ⅶ</span>Suitability Assessment</a></li>
+    </ol>
+  </nav>
 
-  <!-- Appearance -->
-  <section><div class="card">
-    <h2><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="1.2" fill="currentColor" stroke="none"/></svg></span>
-      <span class="zh">外观特征</span><span class="en">Appearance</span></h2>
+  <!-- I Overview -->
+  <section id="s1">
+    <h2 class="sec"><span class="num">Ⅰ</span><span class="zh">概述与基本信息</span><span class="en">Overview &amp; Facts</span></h2>
+    <p class="lead zh">边境牧羊犬源于英格兰与苏格兰交界地带,数百年来经由对<strong>工作能力</strong>而非外貌的严格选育而成,是当今公认智力最高、工作驱力最强的犬种。</p>
+    <p class="lead en">The Border Collie arose along the England–Scotland border, shaped over centuries by selection for <strong>working ability</strong> rather than appearance. It is widely regarded as the most intelligent and work-driven of all breeds.</p>
+    <table>
+      <caption class="zh">表 1 · 基本参数</caption><caption class="en">Table 1 · Key parameters</caption>
+      <thead><tr><th class="zh">项目</th><th class="zh">数据</th><th class="en">Item</th><th class="en">Data</th></tr></thead>
+      <tbody>
+        <tr><td class="zh">寿命</td><td class="zh">约 12–15 年</td><td class="en">Lifespan</td><td class="en">~12–15 years</td></tr>
+        <tr><td class="zh">体重</td><td class="zh">公 14–20 kg;母 12–19 kg</td><td class="en">Weight</td><td class="en">M 14–20 kg; F 12–19 kg</td></tr>
+        <tr><td class="zh">肩高</td><td class="zh">公 48–56 cm;母 46–53 cm</td><td class="en">Height</td><td class="en">M 48–56 cm; F 46–53 cm</td></tr>
+        <tr><td class="zh">被毛</td><td class="zh">双层;长毛(粗)或短毛(顺)</td><td class="en">Coat</td><td class="en">Double; rough or smooth</td></tr>
+        <tr><td class="zh">犬类智商</td><td class="zh">工作/服从智商排名第 1</td><td class="en">Canine IQ</td><td class="en">Ranked 1st in working intelligence</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- II Appearance -->
+  <section id="s2">
+    <h2 class="sec"><span class="num">Ⅱ</span><span class="zh">外观与生理特征</span><span class="en">Physical Characteristics</span></h2>
     <div class="zh">
       <ul>
-        <li><b>体型</b>:中等,身体略长,肌肉发达,兼具速度与耐力。</li>
-        <li><b>被毛</b>:长毛(粗毛)与短毛(顺毛)两种,双层被毛,防水保暖。</li>
-        <li><b>毛色</b>:黑白最常见,另有蓝白、红白、蓝色、三色、陨石色等。</li>
-        <li><b>眼睛</b>:椭圆形,眼神专注,部分为蓝眼或异色瞳。</li>
-        <li><b>耳朵</b>:半立耳或立耳,警觉时竖起。</li>
+        <li><strong>体型</strong>——中等,体长略大于肩高,肌肉匀称,兼具速度与耐力。</li>
+        <li><strong>被毛</strong>——双层结构,外层防水、底层保暖;分长毛与短毛两型。</li>
+        <li><strong>毛色</strong>——以黑白为主,另有蓝白、红白、蓝色、三色及陨石色(merle)。</li>
+        <li><strong>眼睛</strong>——椭圆,眼神专注;部分个体为蓝眼或异色瞳。</li>
+        <li><strong>耳朵</strong>——半立或直立,随警觉度变化。</li>
       </ul>
-      <div class="callout">🐾 最经典的形象是黑白被毛和标志性的"凝视"(eye)——这是它控制羊群的本能。</div>
+      <div class="note"><b>品种标志</b>:黑白被毛与标志性的凝视姿态(the "eye")——后者是其控制羊群的本能表现,详见第 Ⅴ 章。</div>
     </div>
     <div class="en">
       <ul>
-        <li><b>Body</b>: Medium, slightly longer than tall, muscular — built for speed and endurance.</li>
-        <li><b>Coat</b>: Rough (long) or smooth (short); double coat, weather-resistant and insulating.</li>
-        <li><b>Colors</b>: Black-and-white most common; also blue-and-white, red-and-white, blue, tricolor, merle.</li>
-        <li><b>Eyes</b>: Oval and intensely focused; some blue or heterochromatic.</li>
-        <li><b>Ears</b>: Semi-erect or erect, raised when alert.</li>
+        <li><strong>Build</strong> — medium; slightly longer than tall, muscular, built for speed and endurance.</li>
+        <li><strong>Coat</strong> — double layered, weather-resistant outer and insulating under; rough or smooth.</li>
+        <li><strong>Colour</strong> — chiefly black-and-white; also blue-and-white, red-and-white, blue, tricolour, merle.</li>
+        <li><strong>Eyes</strong> — oval and intensely focused; some blue or heterochromatic.</li>
+        <li><strong>Ears</strong> — semi-erect to erect, varying with alertness.</li>
       </ul>
-      <div class="callout">🐾 Its signature look: a black-and-white coat and the intense "eye" it uses to control livestock.</div>
+      <div class="note"><b>Breed hallmark</b>: the black-and-white coat and the fixed stare (the "eye") — an instinct for controlling stock, discussed in §Ⅴ.</div>
     </div>
-  </div></section>
+  </section>
 
-  <!-- Temperament -->
-  <section><div class="card">
-    <h2><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9C1 9 2.5 5.5 6 5.5c2 0 3 1.2 4 2.5 1-1.3 2-2.5 4-2.5 3.5 0 5 3.5 3.5 6.5C19 16.5 12 21 12 21z"/></svg></span>
-      <span class="zh">性格特点</span><span class="en">Temperament</span></h2>
-    <ul class="traits zh">
-      <li><b>极其聪明</b> — 可理解上百个指令,训练上限极高。</li>
-      <li><b>精力旺盛</b> — 需要大量运动和脑力消耗。</li>
-      <li><b>忠诚黏人</b> — 渴望陪伴与协作。</li>
-      <li><b>敏感警觉</b> — 对主人情绪与指令高度敏感。</li>
-      <li><b>牧羊本能</b> — 会追逐、围拢移动的物体。</li>
-    </ul>
-    <ul class="traits en">
-      <li><b>Highly intelligent</b> — understands hundreds of commands.</li>
-      <li><b>High energy</b> — needs lots of physical & mental work.</li>
-      <li><b>Loyal & affectionate</b> — craves companionship and teamwork.</li>
-      <li><b>Sensitive & alert</b> — very responsive to your cues.</li>
-      <li><b>Herding instinct</b> — may chase and "gather" moving things.</li>
-    </ul>
-  </div></section>
+  <!-- III Temperament -->
+  <section id="s3">
+    <h2 class="sec"><span class="num">Ⅲ</span><span class="zh">气质与性格</span><span class="en">Temperament</span></h2>
+    <table>
+      <thead><tr><th class="zh">特质</th><th class="zh">说明</th><th class="en">Trait</th><th class="en">Description</th></tr></thead>
+      <tbody>
+        <tr><td class="zh">高智力</td><td class="zh">可理解数百个指令,学习与推理能力突出</td><td class="en">High intelligence</td><td class="en">Understands hundreds of commands; strong learning and reasoning</td></tr>
+        <tr><td class="zh">强工作驱力</td><td class="zh">需要持续的体力与脑力任务</td><td class="en">Strong work drive</td><td class="en">Requires sustained physical and mental tasks</td></tr>
+        <tr><td class="zh">忠诚亲人</td><td class="zh">高度依附主人,渴望协作</td><td class="en">Loyal &amp; bonded</td><td class="en">Deeply attached; eager to cooperate</td></tr>
+        <tr><td class="zh">敏感警觉</td><td class="zh">对环境与主人情绪高度敏感</td><td class="en">Sensitive &amp; alert</td><td class="en">Highly responsive to environment and owner's mood</td></tr>
+        <tr><td class="zh">牧羊本能</td><td class="zh">会追逐并"圈拢"移动目标</td><td class="en">Herding instinct</td><td class="en">Chases and "gathers" moving targets</td></tr>
+      </tbody>
+    </table>
+  </section>
 
-  <!-- Exercise & care -->
-  <section><div class="card">
-    <h2><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 12h4l2-6 4 12 2-6h4"/></svg></span>
-      <span class="zh">运动 · 训练 · 护理</span><span class="en">Exercise · Training · Grooming</span></h2>
+  <!-- IV Exercise -->
+  <section id="s4">
+    <h2 class="sec"><span class="num">Ⅳ</span><span class="zh">运动、训练与护理</span><span class="en">Exercise, Training &amp; Care</span></h2>
     <div class="grid2">
       <div class="zh">
         <h3>运动</h3>
-        <ul><li>每天至少 <b>1–2 小时</b>高强度运动:跑步、飞盘、捡球、敏捷训练。</li><li>仅散步远远不够,运动不足易焦虑、拆家。</li></ul>
+        <p>每日需 <strong>1–2 小时</strong>高强度活动(奔跑、衔取、敏捷)。单纯散步不足以满足需求;运动匮乏是绝大多数行为问题的根源。</p>
         <h3>训练</h3>
-        <ul><li>尽早社会化与基础训练。</li><li>以正向奖励为主(零食、玩具、表扬)。</li></ul>
+        <p>宜尽早开展社会化与基础服从,采用<strong>正向强化</strong>为主(食物、玩具、口头奖励),避免高压惩罚。</p>
         <h3>护理</h3>
-        <ul><li>长毛每周梳 2–3 次,换毛季加勤。</li><li>约每月洗澡 1 次;定期清耳、刷牙、剪指甲。</li></ul>
+        <p>长毛型每周梳理 2–3 次,换毛期加密;约每月洗浴一次;定期清耳、刷牙、修甲。</p>
       </div>
       <div class="en">
         <h3>Exercise</h3>
-        <ul><li>At least <b>1–2 hours</b> of vigorous activity daily: running, frisbee, fetch, agility.</li><li>Walks alone aren't enough — too little leads to anxiety and destruction.</li></ul>
+        <p><strong>1–2 hours</strong> of vigorous daily activity (running, retrieving, agility). Walking alone is insufficient; under-exercise underlies most behaviour problems.</p>
         <h3>Training</h3>
-        <ul><li>Socialize and train early.</li><li>Use positive reinforcement (treats, toys, praise).</li></ul>
+        <p>Begin socialisation and basic obedience early, led by <strong>positive reinforcement</strong> (food, toys, praise); avoid harsh punishment.</p>
         <h3>Grooming</h3>
-        <ul><li>Brush rough coats 2–3×/week; more in shedding season.</li><li>Bathe ~monthly; clean ears, brush teeth, trim nails regularly.</li></ul>
+        <p>Brush rough coats 2–3×/week, more in moult; bathe ~monthly; clean ears, brush teeth, trim nails regularly.</p>
       </div>
     </div>
-  </div></section>
+  </section>
 
-  <!-- Health -->
-  <section><div class="card">
-    <h2><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
-      <span class="zh">常见健康问题</span><span class="en">Common Health Concerns</span></h2>
+  <!-- V Behaviour & vocalisation -->
+  <section id="s5">
+    <h2 class="sec"><span class="num">Ⅴ</span><span class="zh">行为与叫声解读</span><span class="en">Behaviour &amp; Vocalisation</span></h2>
+    <p class="zh">解读任何单一动作前,应先判断其<strong>整体基调</strong>——同一动作(如摇尾)在放松与紧张状态下含义相反。</p>
+    <p class="en">Before reading any single gesture, assess the <strong>overall state</strong> — the same act (e.g. tail-wagging) means opposite things when relaxed versus stressed.</p>
+
+    <h3 class="zh">5.1 整体状态判读</h3><h3 class="en">5.1 Reading overall state</h3>
+    <table>
+      <thead>
+        <tr><th class="zh">部位</th><th class="zh">放松 / 友好</th><th class="zh">紧张 / 不安</th><th class="zh">警觉 / 兴奋</th>
+            <th class="en">Area</th><th class="en">Relaxed</th><th class="en">Anxious</th><th class="en">Alert</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="zh">身体</td><td class="zh">松弛、重心均匀</td><td class="zh">僵硬、压低</td><td class="zh">前倾、蓄势</td>
+            <td class="en">Body</td><td class="en">Loose, even weight</td><td class="en">Stiff, lowered</td><td class="en">Leaning in, primed</td></tr>
+        <tr><td class="zh">眼睛</td><td class="zh">柔和、会眨</td><td class="zh">露白眼、频繁转开</td><td class="zh">瞳孔放大、死盯</td>
+            <td class="en">Eyes</td><td class="en">Soft, blinking</td><td class="en">Whale-eye, glancing away</td><td class="en">Dilated, fixed stare</td></tr>
+        <tr><td class="zh">耳朵</td><td class="zh">自然半立</td><td class="zh">后贴夹紧</td><td class="zh">前竖朝向声源</td>
+            <td class="en">Ears</td><td class="en">Naturally set</td><td class="en">Pinned back</td><td class="en">Forward to sound</td></tr>
+        <tr><td class="zh">尾巴</td><td class="zh">中位、大幅松软摆</td><td class="zh">夹低贴腹</td><td class="zh">高举、小幅快抖</td>
+            <td class="en">Tail</td><td class="en">Mid, broad loose wag</td><td class="en">Tucked low</td><td class="en">High, fast small flicks</td></tr>
+      </tbody>
+    </table>
+    <div class="note zh"><b>要点</b>:摇尾并不等于友好。夹低+快速小摇多为紧张;大幅松软摇并伴全身扭动才是真正的愉悦。</div>
+    <div class="note en"><b>Key</b>: a wag is not necessarily friendly. Low, fast wagging signals tension; a broad, loose wag with a wiggling body means genuine joy.</div>
+
+    <h3 class="zh">5.2 叫声与发声</h3><h3 class="en">5.2 Vocalisations</h3>
+    <table>
+      <thead><tr><th class="zh">声音</th><th class="zh">含义</th><th class="en">Sound</th><th class="en">Meaning</th></tr></thead>
+      <tbody>
+        <tr><td class="zh">短促单声吠</td><td class="zh">提醒:"有情况"</td><td class="en">Single sharp bark</td><td class="en">Alert: "something's happening"</td></tr>
+        <tr><td class="zh">连续高频吠</td><td class="zh">兴奋叠加警戒</td><td class="en">Rapid repeated barking</td><td class="en">Excitement plus guarding</td></tr>
+        <tr><td class="zh">尖锐停不下的吠</td><td class="zh">挫败 / 焦虑 / 急切需求</td><td class="en">Shrill, relentless bark</td><td class="en">Frustration / anxiety / demand</td></tr>
+        <tr><td class="zh">高音呜咽(whine)</td><td class="zh">请求、期待或轻度焦虑</td><td class="en">High whine</td><td class="en">Request, anticipation, mild anxiety</td></tr>
+        <tr><td class="zh">低沉哼唧、叹气</td><td class="zh">放松,或无聊的小抱怨</td><td class="en">Low grumble / sigh</td><td class="en">Contentment, or bored complaint</td></tr>
+        <tr><td class="zh">低吼(growl)</td><td class="zh">⚠ 警告:"请停,我不适"</td><td class="en">Growl</td><td class="en">⚠ Warning: "stop, I'm uneasy"</td></tr>
+        <tr><td class="zh">嚎叫(howl)</td><td class="zh">回应声响,或分离焦虑</td><td class="en">Howl</td><td class="en">Answering sounds, or separation anxiety</td></tr>
+      </tbody>
+    </table>
+    <div class="warn zh"><b>切勿因低吼而惩罚它。</b>低吼是礼貌的预警;惩罚会使其"跳过警告直接啃咬"。正确做法是移除令其不适的来源,再行脱敏。</div>
+    <div class="warn en"><b>Never punish a growl.</b> A growl is a courteous warning; punishing it teaches the dog to "skip the warning and bite". Instead, remove the trigger and desensitise gradually.</div>
+
+    <h3 class="zh">5.3 边牧特有本能行为</h3><h3 class="en">5.3 Breed-specific instincts</h3>
+    <div class="zh">
+      <ul>
+        <li><strong>凝视—潜行—追逐(eye · stalk · chase)</strong>——压低身体死盯移动物,是牧羊本能链条,而非攻击。</li>
+        <li><strong>咬后跟(heeling)</strong>——本能地驱赶羊群,易由奔跑的人、车、儿童触发;宜引导至玩具。</li>
+        <li><strong>圈拢转圈</strong>——试图把人或宠物"聚成一群"。</li>
+        <li><strong>声/光高度敏感</strong>——对吸尘器、摩托、闪光反应强烈,需脱敏。</li>
+      </ul>
+      <div class="warn"><b>务必避免:</b>用激光笔、逗弄影子进行游戏。光点"永远无法捕获",极易诱发难以逆转的<strong>强迫行为</strong>。</div>
+    </div>
+    <div class="en">
+      <ul>
+        <li><strong>Eye · stalk · chase</strong> — crouching and fixating on moving objects; a herding sequence, not aggression.</li>
+        <li><strong>Heeling / nipping</strong> — an instinct to drive stock, triggered by runners, bikes, children; redirect to toys.</li>
+        <li><strong>Circling to gather</strong> — attempting to herd people or pets "into a flock".</li>
+        <li><strong>Sound/light sensitivity</strong> — strong reactions to vacuums, engines, flashes; requires desensitisation.</li>
+      </ul>
+      <div class="warn"><b>Avoid</b> laser pointers and shadow games. An uncatchable dot readily triggers hard-to-reverse <strong>compulsive behaviour</strong>.</div>
+    </div>
+
+    <h3 class="zh">5.4 速查:看到 / 听到 → 应对</h3><h3 class="en">5.4 Quick reference</h3>
+    <table>
+      <thead><tr><th class="zh">信号</th><th class="zh">含义</th><th class="zh">应对</th><th class="en">Signal</th><th class="en">Meaning</th><th class="en">Response</th></tr></thead>
+      <tbody>
+        <tr><td class="zh">压低身盯目标</td><td class="zh">锁定、想控制</td><td class="zh">引导至可抓取玩具</td><td class="en">Crouched stare</td><td class="en">Locked on, wants control</td><td class="en">Redirect to a catchable toy</td></tr>
+        <tr><td class="zh">露白眼、舔鼻、打哈欠</td><td class="zh">轻度紧张</td><td class="zh">退一步、降低压力</td><td class="en">Whale-eye, lip-lick, yawn</td><td class="en">Mild stress</td><td class="en">Back off, lower pressure</td></tr>
+        <tr><td class="zh">前趴翘臀(作揖)</td><td class="zh">邀请玩耍</td><td class="zh">给予正向互动</td><td class="en">Play bow</td><td class="en">Invitation to play</td><td class="en">Engage positively</td></tr>
+        <tr><td class="zh">夹尾、耳后贴</td><td class="zh">恐惧</td><td class="zh">移除威胁,勿强拉</td><td class="en">Tucked tail, pinned ears</td><td class="en">Fear</td><td class="en">Remove threat, don't force</td></tr>
+        <tr><td class="zh">低吼</td><td class="zh">警告</td><td class="zh">停止动作,勿惩罚</td><td class="en">Growl</td><td class="en">Warning</td><td class="en">Stop, do not punish</td></tr>
+        <tr><td class="zh">出门时尖叫/破坏</td><td class="zh">疑似分离焦虑</td><td class="zh">渐进脱敏,必要时求助</td><td class="en">Distress on departure</td><td class="en">Possible separation anxiety</td><td class="en">Desensitise; seek help if severe</td></tr>
+      </tbody>
+    </table>
+    <div class="note zh"><b>了解你自己的犬</b>:记录"时间 / 情境 / 动作或叫声 / 后果"的行为日记,持续两周即可发现规律;必要时录像回看,并咨询正向训练师或兽医行为专家。</div>
+    <div class="note en"><b>Know your own dog</b>: keep a two-week log of "time / context / act or sound / outcome" to reveal patterns; record video for review, and consult a positive trainer or veterinary behaviourist when needed.</div>
+  </section>
+
+  <!-- VI Health -->
+  <section id="s6">
+    <h2 class="sec"><span class="num">Ⅵ</span><span class="zh">健康与遗传问题</span><span class="en">Health &amp; Genetics</span></h2>
     <div class="zh">
       <ul>
         <li>髋关节发育不良(CHD)</li>
-        <li>眼部疾病(柯利眼异常 CEA、进行性视网膜萎缩 PRA)</li>
+        <li>眼部疾病:柯利眼异常(CEA)、进行性视网膜萎缩(PRA)</li>
         <li>癫痫</li>
-        <li>MDR1 基因缺陷(对某些药物敏感)</li>
-        <li>听力问题(陨石色个体更需留意)</li>
+        <li>MDR1 基因缺陷——对部分药物敏感</li>
+        <li>听力障碍(陨石色个体风险较高)</li>
       </ul>
-      <div class="callout">🩺 定期体检;购买/领养时了解父母犬健康与基因检测情况。</div>
+      <div class="note"><b>建议</b>:定期体检;引入幼犬前核查父母犬的健康档案与基因检测(尤其 MDR1、CEA)。</div>
     </div>
     <div class="en">
       <ul>
         <li>Canine hip dysplasia (CHD)</li>
-        <li>Eye disorders (CEA, PRA)</li>
+        <li>Eye disorders: Collie Eye Anomaly (CEA), Progressive Retinal Atrophy (PRA)</li>
         <li>Epilepsy</li>
-        <li>MDR1 gene mutation (drug sensitivity)</li>
-        <li>Hearing issues (especially merle dogs)</li>
+        <li>MDR1 mutation — sensitivity to certain drugs</li>
+        <li>Hearing loss (higher risk in merle individuals)</li>
       </ul>
-      <div class="callout">🩺 Get regular check-ups; ask about the parents' health and genetic tests.</div>
+      <div class="note"><b>Advice</b>: schedule regular check-ups; before acquiring a pup, verify the parents' health records and genetic tests (esp. MDR1, CEA).</div>
     </div>
-  </div></section>
+  </section>
 
-  <!-- Vaccine & deworm -->
-  <section><div class="card">
-    <h2><span class="ico"><svg viewBox="0 0 24 24"><path d="M3 21l6-6m2-2l7-7m-3-3l6 6-4 1-1-1-2 2 1 1-2 2-1-1-2 2 1 1-2 2-3-3z"/></svg></span>
-      <span class="zh">疫苗与驱虫时间表</span><span class="en">Vaccine & Deworming Schedule</span></h2>
-    <table>
-      <tr><th class="zh">周龄</th><th class="zh">疫苗</th><th class="en">Age</th><th class="en">Vaccine</th></tr>
-      <tr><td class="zh">6–8 周</td><td class="zh">第一针联苗</td><td class="en">6–8 wk</td><td class="en">First combo vaccine</td></tr>
-      <tr><td class="zh">10–12 周</td><td class="zh">第二针联苗</td><td class="en">10–12 wk</td><td class="en">Second combo vaccine</td></tr>
-      <tr><td class="zh">14–16 周</td><td class="zh">第三针联苗 + 狂犬</td><td class="en">14–16 wk</td><td class="en">Third combo + rabies</td></tr>
-      <tr><td class="zh">每年</td><td class="zh">联苗 + 狂犬 加强</td><td class="en">Yearly</td><td class="en">Combo + rabies booster</td></tr>
-    </table>
-    <p class="muted zh">驱虫:体内幼犬每月 1 次、成犬每 3 个月 1 次;体外每月 1 次。完成基础疫苗前避免去人犬密集场所。</p>
-    <p class="muted en">Deworming: internal — puppies monthly, adults every 3 months; external monthly. Avoid crowded places until the full puppy series is done.</p>
-  </div></section>
-
-  <!-- Feeding -->
-  <section><div class="card">
-    <h2><span class="ico"><svg viewBox="0 0 24 24"><path d="M6 3v7a3 3 0 006 0V3M9 3v18M18 3c-2 0-3 3-3 6s1 4 3 4v8"/></svg></span>
-      <span class="zh">分阶段喂养</span><span class="en">Feeding by Life Stage</span></h2>
-    <table>
-      <tr><th class="zh">阶段</th><th class="zh">年龄</th><th class="zh">要点</th><th class="en">Stage</th><th class="en">Age</th><th class="en">Key points</th></tr>
-      <tr><td class="zh">幼犬</td><td class="zh">2–12 月</td><td class="zh">幼犬粮,每天 3–4 顿</td><td class="en">Puppy</td><td class="en">2–12 mo</td><td class="en">Puppy food, 3–4 meals/day</td></tr>
-      <tr><td class="zh">青年</td><td class="zh">1–2 岁</td><td class="zh">过渡成犬粮,每天 2 顿</td><td class="en">Adolescent</td><td class="en">1–2 yr</td><td class="en">Transition to adult food, 2 meals</td></tr>
-      <tr><td class="zh">成犬</td><td class="zh">2–7 岁</td><td class="zh">成犬粮,控热防肥胖</td><td class="en">Adult</td><td class="en">2–7 yr</td><td class="en">Adult food, control calories</td></tr>
-      <tr><td class="zh">老年</td><td class="zh">7 岁+</td><td class="zh">老年粮,护关节/心脏</td><td class="en">Senior</td><td class="en">7 yr+</td><td class="en">Senior food, joints & heart</td></tr>
-    </table>
-    <div class="callout zh">⚠️ 换粮 7 天渐进过渡;常备清水;禁喂巧克力、洋葱、大蒜、葡萄、木糖醇。</div>
-    <div class="callout en">⚠️ Switch food gradually over ~7 days; keep fresh water; never feed chocolate, onion, garlic, grapes, or xylitol.</div>
-  </div></section>
-
-  <!-- Fit -->
-  <section><div class="card">
-    <h2><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9C1 9 2.5 5.5 6 5.5c2 0 3 1.2 4 2.5 1-1.3 2-2.5 4-2.5 3.5 0 5 3.5 3.5 6.5C19 16.5 12 21 12 21z"/></svg></span>
-      <span class="zh">适合什么样的主人</span><span class="en">Is It Right for You?</span></h2>
+  <!-- VII Suitability -->
+  <section id="s7">
+    <h2 class="sec"><span class="num">Ⅶ</span><span class="zh">饲养适配性评估</span><span class="en">Suitability Assessment</span></h2>
     <div class="fit">
-      <div class="yes">
-        <h3 class="zh">✅ 适合</h3><h3 class="en">✅ Good fit</h3>
-        <ul class="zh"><li>热爱运动、有时间陪伴</li><li>愿意投入训练与互动</li><li>喜欢犬类运动(敏捷/飞盘)</li></ul>
-        <ul class="en"><li>Active, with time to spend</li><li>Willing to train and interact</li><li>Enjoys dog sports (agility/frisbee)</li></ul>
+      <div class="col yes">
+        <h3 class="zh">适合的饲主</h3><h3 class="en">Well suited</h3>
+        <ul class="zh"><li>生活方式活跃、能保证陪伴</li><li>愿意投入训练与互动</li><li>有意参与犬类运动(敏捷、飞盘)</li></ul>
+        <ul class="en"><li>Active lifestyle with time to spend</li><li>Willing to invest in training</li><li>Interested in dog sports</li></ul>
       </div>
-      <div class="no">
-        <h3 class="zh">⛔ 不太适合</h3><h3 class="en">⛔ Not ideal</h3>
-        <ul class="zh"><li>长期不在家、无暇陪伴</li><li>无法保证每天运动量</li><li>想养安静省心的狗</li></ul>
-        <ul class="en"><li>Away from home for long hours</li><li>Can't guarantee daily exercise</li><li>Wants a quiet, low-energy dog</li></ul>
+      <div class="col no">
+        <h3 class="zh">不建议的情形</h3><h3 class="en">Not advisable</h3>
+        <ul class="zh"><li>长期无人在家</li><li>无法保证每日运动量</li><li>期望安静低需求的伴侣犬</li></ul>
+        <ul class="en"><li>Home empty for long hours</li><li>Cannot ensure daily exercise</li><li>Wants a quiet, low-need companion</li></ul>
       </div>
     </div>
-  </div></section>
+  </section>
 
 </main>
 
 <footer>
-  <p class="zh">本页面仅供参考,具体饲养请结合个体情况并咨询专业兽医。<br>更多图片:<a href="https://commons.wikimedia.org/wiki/Category:Border_Collies" target="_blank" rel="noopener">Wikimedia Commons</a></p>
-  <p class="en">For reference only — consult a professional veterinarian for your dog's specific care.<br>More photos: <a href="https://commons.wikimedia.org/wiki/Category:Border_Collies" target="_blank" rel="noopener">Wikimedia Commons</a></p>
+  <p class="zh">本文为原创整理,综合主流犬类行为学与边境牧羊犬品种特性的公开知识,面向家庭饲主,仅供参考。涉及攻击性、强迫行为或疑似疾病时,请咨询执业兽医或兽医行为专家。图片资料参见 <a href="https://commons.wikimedia.org/wiki/Category:Border_Collies" target="_blank" rel="noopener">Wikimedia Commons</a>。</p>
+  <p class="en">Original compilation drawing on public knowledge of canine ethology and Border Collie breed traits, for household owners and reference only. For aggression, compulsive behaviour, or suspected illness, consult a licensed veterinarian or veterinary behaviourist. Photographs: <a href="https://commons.wikimedia.org/wiki/Category:Border_Collies" target="_blank" rel="noopener">Wikimedia Commons</a>.</p>
 </footer>
 
 <script>
